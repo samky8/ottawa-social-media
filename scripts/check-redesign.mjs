@@ -27,7 +27,7 @@ for(const [file,html] of htmlByFile){
   assert.equal((template.match(/class="ticket post"/g)||[]).length,p.posts);
  }
 }
-assert.deepEqual(packages.map(p=>[p.reels,p.posts]),[[2,2],[4,6],[6,8]]);
+assert.deepEqual(packages.map(p=>[p.reels,p.posts]),[[3,6],[4,8],[6,9]]);
 // Exercise the actual explorer handlers without introducing a browser dependency.
 const buttons=packages.map(p=>({dataset:{explore:p.name},attrs:{},addEventListener(type,fn){this[type]=fn;},setAttribute(k,v){this.attrs[k]=v;}}));
 const preview={replaceChildren(node){this.selected=node.name;}};
@@ -43,7 +43,7 @@ for(const p of packages){
  const events=schedule(p);
  assert.equal(events.filter(e=>e.type==='Reel').length,p.reels);
  assert.equal(events.filter(e=>e.type==='Feed post').length,p.posts);
- assert.equal(events.filter(e=>e.type==='Shoot').length,p.name==='Premium'?2:1);
+ assert.equal(events.filter(e=>e.type==='Shoot').length,p.shootCount);
  assert(events.every(e=>e.day>=1&&e.day<=28));
  assert.equal((calendarBody(p).match(/class="calendar-day /g)||[]).length,28);
 }

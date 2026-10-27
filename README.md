@@ -1,6 +1,12 @@
 # LOCAL / SOCIAL — local website preview
 
-A six-page, dependency-free static website for an Ottawa social media management, SEO/AEO and digital presence service. LOCAL / SOCIAL is a provisional identity, not a confirmed agency name. No public deployment is configured.
+A six-page, dependency-free static website for an Ottawa social media management, SEO/AEO and digital presence service. LOCAL / SOCIAL is a provisional identity, not a confirmed agency name.
+
+Draft URL: https://samky8.github.io/ottawa-social-media-draft/
+
+Repository: https://github.com/samky8/ottawa-social-media-draft
+
+GitHub Pages serves `docs/` from `main`. To update the draft, run `npm run build:pages`, run `npm run check`, then commit and push the changed source and generated files. The Pages build adds the repository URL prefix to links and assets while keeping `dist/` suitable for local preview. The public draft retains noindex metadata and the unconnected form notice; it is publicly accessible, not access-controlled.
 
 ## Run
 
@@ -45,7 +51,7 @@ No private source brief, user filesystem paths, project relationship notes, cred
 
 Build and static checks cover six pages, local links and assets, unique primary headings, metadata, package counts and exclusion of unapproved project claims. Calendar checks verify all monthly quantities, package switching, list/grid modes, event details and service selection. These interaction checks exercise handlers with a lightweight DOM stub; they do not replace browser QA. Responsive CSS includes mobile navigation, stacked packages and forms, visible focus styles and reduced-motion support.
 
-Desktop/mobile visual inspection, browser interaction tests and console inspection remain unverified: the connected browser surface was unavailable and native Chrome selection repeatedly failed with a window-binding error. Complete those checks before launch. A local Git repository is initialized; no remote repository or public deployment has been created.
+Desktop/mobile visual inspection, browser interaction tests and console inspection remain unverified: the connected browser surface was unavailable and native Chrome selection repeatedly failed with a window-binding error. Complete those checks before the final business launch.
 
 ## Editorial redesign
 
