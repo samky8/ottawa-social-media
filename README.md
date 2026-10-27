@@ -1,6 +1,6 @@
 # LOCAL / SOCIAL — local website preview
 
-A five-page, dependency-free static website for an Ottawa social media management service. LOCAL / SOCIAL is a provisional identity, not a confirmed agency name. No public deployment is configured.
+A six-page, dependency-free static website for an Ottawa social media management, SEO/AEO and digital presence service. LOCAL / SOCIAL is a provisional identity, not a confirmed agency name. No public deployment is configured.
 
 ## Run
 
@@ -12,7 +12,7 @@ npm run check
 npm start
 ```
 
-Open http://localhost:4173. Pages: Home, Services & Packages, Work, About, Contact. `dist/` contains the complete generated site. Run the build after editing source files.
+Open http://localhost:4173. Pages: Home, Services, Pricing & Calendar, Work, About, Contact. `dist/` contains the complete generated site. Run the build after editing source files.
 
 ## Edit
 
@@ -22,6 +22,9 @@ Open http://localhost:4173. Pages: Home, Services & Packages, Work, About, Conta
 - `editorial.css`: the bolder editorial layout, responsive art direction and interactive component styles.
 - `scripts/components.mjs`: package explorer templates, trust cues and sample creative notes.
 - `app.js`: navigation, package preselection, inquiry validation and download.
+- `content.mjs`: also holds separately scoped SEO/AEO and digital presence offerings.
+- `scripts/planner.mjs` and `planner.js`: sample calendar, service selector and their interactions.
+- `clarity.css`: service index, pricing calendar and responsive page refinements.
 - `ASSET-SOURCES.md`: image sources and usage context.
 
 The form validates locally, has a honeypot, and allows downloading an inquiry. It never claims delivery. No server submission or storage is implemented. `formEndpoint` is a reserved setting, not an automatic integration. A production integration must include server validation, spam/rate protection, delivery/error states and an appropriate privacy notice.
@@ -40,10 +43,12 @@ No private source brief, user filesystem paths, project relationship notes, cred
 
 ## Verification
 
-Build and static checks pass: five pages, local links and assets, unique primary headings, metadata, package counts and exclusion of unapproved project claims. JavaScript syntax checks pass, and the preview responds with HTTP 200. Responsive CSS includes mobile navigation, stacked packages and forms, visible focus styles and reduced-motion support.
+Build and static checks cover six pages, local links and assets, unique primary headings, metadata, package counts and exclusion of unapproved project claims. Calendar checks verify all monthly quantities, package switching, list/grid modes, event details and service selection. These interaction checks exercise handlers with a lightweight DOM stub; they do not replace browser QA. Responsive CSS includes mobile navigation, stacked packages and forms, visible focus styles and reduced-motion support.
 
 Desktop/mobile visual inspection, browser interaction tests and console inspection remain unverified: the connected browser surface was unavailable and native Chrome selection repeatedly failed with a window-binding error. Complete those checks before launch. A local Git repository is initialized; no remote repository or public deployment has been created.
 
 ## Editorial redesign
 
-All original copy and package information is retained. The new design adds oversized typography, an asymmetric creative gallery, section navigation, an interactive monthly content explorer, expandable creative notes and a numbered process. The explorer uses the same central package data as the comparison; its content counts are not engagement or outcome claims. Full package details remain visible without JavaScript. New checks verify local fragment links, template counts and selection behaviour.
+The latest revision simplifies the homepage and headings, removes repetitive homepage sections, moves the complete package details and FAQs to Pricing, and keeps service scope and process on Services. The numbered service index, asymmetric creative gallery, service selector and four-week sample calendar provide a distinct editorial layout. The calendar is illustrative, not a booking system or an agreed publishing schedule. Full package details and the default Growth calendar render without JavaScript.
+
+SEO/AEO is owner-confirmed as a service area; no credentials, years of experience or results are invented. Confirm its final deliverables and quoting process before launch. The explanatory copy follows Google's guidance: https://developers.google.com/search/docs/appearance/ai-features and https://developers.google.com/search/docs/fundamentals/seo-starter-guide. The competitor reference sociallymade.ca could not be retrieved through the browsing tool; no claim of a completed competitor design review is made.

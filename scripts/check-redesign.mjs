@@ -2,6 +2,7 @@ import {readFile,readdir,access} from 'node:fs/promises';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import {packages} from '../content.mjs';
+import {schedule,calendarBody} from './planner.mjs';
 const pages=(await readdir('dist')).filter(f=>f.endsWith('.html'));
 const htmlByFile=new Map(await Promise.all(pages.map(async f=>[f,await readFile(`dist/${f}`,'utf8')])));
 let links=0;
@@ -33,4 +34,18 @@ const preview={replaceChildren(node){this.selected=node.name;}};
 const templates=Object.fromEntries(packages.map(p=>[`mix-${p.name}`,{content:{cloneNode(){return {name:p.name};}}}]));
 vm.runInNewContext(await readFile('app.js','utf8'),{document:{querySelector(){return null;},querySelectorAll(){return buttons;},addEventListener(){},getElementById(id){return id==='plan-preview'?preview:templates[id];}}});
 for(const button of buttons){button.click();assert.equal(preview.selected,button.dataset.explore);assert.equal(buttons.filter(b=>b.attrs['aria-pressed']==='true').length,1);assert.equal(button.attrs['aria-pressed'],'true');}
-console.log(`PASS: ${pages.length} pages, ${links} local links/assets/fragments, package content counts and all 3 explorer selections.`);
+assert.equal(pages.length,6);
+assert(!htmlByFile.get('index.html').includes('id="packages"'));
+assert(!htmlByFile.get('services.html').includes('id="packages"'));
+assert(htmlByFile.get('pricing.html').includes('id="packages"'));
+assert(htmlByFile.get('services.html').includes('id="seo"'));
+for(const p of packages){
+ const events=schedule(p);
+ assert.equal(events.filter(e=>e.type==='Reel').length,p.reels);
+ assert.equal(events.filter(e=>e.type==='Feed post').length,p.posts);
+ assert.equal(events.filter(e=>e.type==='Shoot').length,p.name==='Premium'?2:1);
+ assert(events.every(e=>e.day>=1&&e.day<=28));
+ assert.equal((calendarBody(p).match(/class="calendar-day /g)||[]).length,28);
+}
+await import('./check-planner.mjs');
+console.log(`PASS: ${pages.length} pages, ${links} local links/assets/fragments, page structure and calendar quantities for all packages.`);
