@@ -31,6 +31,7 @@ Open http://localhost:4173. Pages: Home, Services, Pricing & Calendar, Work, Abo
 - `content.mjs`: also holds separately scoped SEO/AEO and digital presence offerings.
 - `scripts/planner.mjs` and `planner.js`: sample calendar, service selector and their interactions.
 - `clarity.css`: service index, pricing calendar and responsive page refinements.
+- `motion.js` and `motion.css`: progressive scroll reveals, reading progress, fine-pointer hero tilt, hover treatments and a native-dialog creative viewer. The viewer supports previous/next, arrow keys, Escape and focus restoration. Reduced-motion preferences disable movement, including when changed during the session. Content remains visible without the enhancement script.
 - `ASSET-SOURCES.md`: image sources and usage context.
 
 The form validates locally, has a honeypot, and allows downloading an inquiry. It never claims delivery. No server submission or storage is implemented. `formEndpoint` is a reserved setting, not an automatic integration. A production integration must include server validation, spam/rate protection, delivery/error states and an appropriate privacy notice.
