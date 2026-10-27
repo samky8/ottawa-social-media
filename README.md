@@ -19,6 +19,8 @@ Open http://localhost:4173. Pages: Home, Services & Packages, Work, About, Conta
 - `content.mjs`: brand settings, package data, sample entries and FAQs.
 - `scripts/build.mjs`: page copy, layouts and SEO generation.
 - `styles.css`: colours, typography, responsive styling and motion preferences.
+- `editorial.css`: the bolder editorial layout, responsive art direction and interactive component styles.
+- `scripts/components.mjs`: package explorer templates, trust cues and sample creative notes.
 - `app.js`: navigation, package preselection, inquiry validation and download.
 - `ASSET-SOURCES.md`: image sources and usage context.
 
@@ -41,3 +43,7 @@ No private source brief, user filesystem paths, project relationship notes, cred
 Build and static checks pass: five pages, local links and assets, unique primary headings, metadata, package counts and exclusion of unapproved project claims. JavaScript syntax checks pass, and the preview responds with HTTP 200. Responsive CSS includes mobile navigation, stacked packages and forms, visible focus styles and reduced-motion support.
 
 Desktop/mobile visual inspection, browser interaction tests and console inspection remain unverified: the connected browser surface was unavailable and native Chrome selection repeatedly failed with a window-binding error. Complete those checks before launch. A local Git repository is initialized; no remote repository or public deployment has been created.
+
+## Editorial redesign
+
+All original copy and package information is retained. The new design adds oversized typography, an asymmetric creative gallery, section navigation, an interactive monthly content explorer, expandable creative notes and a numbered process. The explorer uses the same central package data as the comparison; its content counts are not engagement or outcome claims. Full package details remain visible without JavaScript. New checks verify local fragment links, template counts and selection behaviour.

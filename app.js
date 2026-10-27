@@ -2,6 +2,15 @@ const toggle=document.querySelector('#menu-toggle');
 toggle?.addEventListener('click',()=>{const open=toggle.getAttribute('aria-expanded')!=='true';toggle.setAttribute('aria-expanded',String(open));document.querySelector('#navigation').classList.toggle('open',open);});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&toggle?.getAttribute('aria-expanded')==='true'){toggle.click();toggle.focus();}});
 const form=document.querySelector('#inquiry');
+document.querySelectorAll('[data-explore]').forEach(button=>{
+ button.addEventListener('click',()=>{
+  const template=document.getElementById(`mix-${button.dataset.explore}`);
+  const preview=document.getElementById('plan-preview');
+  if(!template||!preview)return;
+  document.querySelectorAll('[data-explore]').forEach(other=>other.setAttribute('aria-pressed',String(other===button)));
+  preview.replaceChildren(template.content.cloneNode(true));
+ });
+});
 if(form){
  const interest=form.elements.interest;const plan=new URLSearchParams(location.search).get('plan');if([...interest.options].some(o=>o.value===plan))interest.value=plan;
  let prepared='';const status=document.querySelector('#form-status'),download=document.querySelector('#download');

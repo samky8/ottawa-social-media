@@ -1,3 +1,1 @@
-import {readFile,readdir,access} from 'node:fs/promises';import assert from 'node:assert/strict';import {packages} from '../content.mjs';
-let links=0;for(const file of (await readdir('dist')).filter(f=>f.endsWith('.html'))){const html=await readFile(`dist/${file}`,'utf8');assert.equal((html.match(/<h1>/g)||[]).length,1,`${file}: exactly one h1`);assert(html.includes('name="description"'));assert(html.includes('noindex,nofollow'));for(const [,url]of html.matchAll(/(?:href|src)="([^"]+)"/g)){if(!url.startsWith('/'))continue;const p=url.split('?')[0];await access('dist'+(p==='/'?'/index.html':p));links++;}assert(!/OttawaEvents|Ottawa\.Catering|Ad Mare|guaranteed growth|most popular/i.test(html));}
-assert.deepEqual(packages.map(p=>[p.reels,p.posts]),[[2,2],[4,6],[6,8]]);console.log(`PASS: 5 pages, ${links} local links/assets, package totals, metadata and unapproved-project exclusions.`);
+import './check-redesign.mjs';
