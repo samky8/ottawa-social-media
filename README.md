@@ -32,6 +32,7 @@ Open http://localhost:4173. Pages: Home, Services, Pricing & Calendar, Work, Abo
 - `scripts/planner.mjs` and `planner.js`: sample calendar, service selector and their interactions.
 - `clarity.css`: service index, pricing calendar and responsive page refinements.
 - `motion.js` and `motion.css`: progressive scroll reveals, reading progress, fine-pointer hero tilt, hover treatments and a native-dialog creative viewer. The viewer supports previous/next, arrow keys, Escape and focus restoration. Reduced-motion preferences disable movement, including when changed during the session. Content remains visible without the enhancement script.
+- `playful.css` and `hearts.js`: rounded stamp-style buttons and personal hearts beside creative samples. Likes persist in localStorage in the same browser, sync across tabs, can be undone, and send nothing to a server. Storage failures degrade to a page-only reaction. The pop effect respects reduced-motion preferences; no engagement totals are displayed.
 - `ASSET-SOURCES.md`: image sources and usage context.
 
 The form validates locally, has a honeypot, and allows downloading an inquiry. It never claims delivery. No server submission or storage is implemented. `formEndpoint` is a reserved setting, not an automatic integration. A production integration must include server validation, spam/rate protection, delivery/error states and an appropriate privacy notice.
