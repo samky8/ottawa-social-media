@@ -6,9 +6,9 @@
 @media(max-width:760px){.button,.plan .button,.button.nav-cta{min-height:52px;padding:9px 12px 9px 19px;gap:15px}.button>span{width:29px;height:29px;flex-basis:29px;font-size:18px}.hero-actions .button{font-size:11px;padding:10px 12px 10px 17px;gap:12px}.heart-button{min-width:46px}.sample-caption{padding-right:53px}.sample-caption h3{max-width:100%}}
 @media(prefers-reduced-motion:reduce){.button,.button:hover,.button:focus-visible,.button:active,.button>span,.view-art,.heart-button svg,.heart-button:hover svg{transform:none!important;transition:none!important}.heart-button.is-popping svg,.heart-button.is-popping:after{animation:none!important}}
 
-/* Explicit spacing keeps the slash balanced without text-node whitespace. */
+/* Optical spacing shifts the slash toward SOCIAL while preserving logo width. */
 .wordmark .wordmark-text{display:inline-block;font:inherit;letter-spacing:inherit}
-.wordmark i{margin:0 .18em;padding:0 .13em;letter-spacing:0;transform-origin:50% 55%}
+.wordmark i{margin:0 .10em 0 .26em;padding:0 .13em;letter-spacing:0;transform-origin:50% 55%}
 @keyframes wordmark-slash-shake{
   0%,100%{transform:skew(-10deg) translateX(0) rotate(0)}
   20%{transform:skew(-10deg) translateX(-1px) rotate(-7deg)}
@@ -41,3 +41,7 @@
 .plan .offer-terms{line-height:1.7;font-weight:600}
 .about-story{grid-template-columns:minmax(0,780px);justify-content:center}
 .contact-email{overflow-wrap:anywhere}
+
+/* A small wordmark accent in the current monthly price. */
+.price-period{white-space:nowrap}
+.price-slash{display:inline-block;font-family:Manrope,Arial,sans-serif;font-style:normal;font-weight:800;font-size:14px;line-height:1.2;color:var(--ink);background:var(--coral);padding:0 .13em;margin:0 .10em 0 .26em;letter-spacing:0;transform:skew(-10deg);transform-origin:50% 55%;text-shadow:none}

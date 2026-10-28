@@ -3,7 +3,8 @@
 .laptop-sticky{position:relative;padding:18px 0 45px}
 .laptop-hint{text-align:center;font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin:0 0 22px;color:var(--muted)}
 .laptop-hint span{display:inline-block;margin-left:12px;color:#a12d1c;font-size:20px}
-.calendar-laptop{position:relative;width:94%;margin:auto;perspective:1600px;transform:translateY(calc(-1 * var(--lid-lift,0px)));margin-bottom:calc(-1 * var(--lid-lift,0px))}
+/* Anchor perspective below the hinge so the folded lid stays above the base. */
+.calendar-laptop{position:relative;width:94%;margin:auto;perspective:1600px;perspective-origin:center bottom;transform:translateY(calc(-1 * var(--lid-lift,0px)));margin-bottom:calc(-1 * var(--lid-lift,0px))}
 .laptop-lid:after{content:'LOCAL / SOCIAL';position:absolute;inset:0;display:grid;place-items:center;border-radius:inherit;background:linear-gradient(145deg,#e4e8e5,#a8b3ac 55%,#d5dcd7);color:#48564c;letter-spacing:.2em;font-weight:800;backface-visibility:hidden;transform:translateZ(3px);opacity:var(--cover-opacity,0);pointer-events:none}
 .laptop-lid{position:relative;transform-origin:center bottom;transform-style:preserve-3d;transform:rotateX(var(--lid-angle,0deg));border-radius:22px 22px 7px 7px;background:#202522;border:2px solid #8c9692;padding:14px 14px 20px;box-shadow:0 0 0 1px #242a27,0 14px 40px #18201b26}
 .laptop-lid:before{content:'';position:absolute;top:5px;left:50%;width:5px;height:5px;border-radius:50%;background:#0a0f0c;box-shadow:0 0 0 1px #424c46}
@@ -25,9 +26,23 @@
  .is-scroll-laptop .laptop-hint{opacity:var(--hint-opacity,1)}
 }
 @media(hover:hover) and (pointer:fine){
- .laptop-screen,.laptop-screen *{cursor:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2232%22%20height%3D%2232%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20stop-color%3D%22%23d8f4ff%22%20stop-opacity%3D%22.95%22%2F%3E%3Cstop%20offset%3D%22.45%22%20stop-color%3D%22%2365bafa%22%20stop-opacity%3D%22.9%22%2F%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%23326ed3%22%20stop-opacity%3D%22.95%22%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Cpath%20d%3D%22M22%205%2010%2016l12%2011%202-4-8-7%208-7Z%22%20fill%3D%22url(%23g)%22%20stroke%3D%22%23377ec5%22%20stroke-width%3D%22.8%22%20stroke-linejoin%3D%22round%22%2F%3E%3Cpath%20d%3D%22M21%207%2011.5%2016%2021%2025%22%20fill%3D%22none%22%20stroke%3D%22%23ecfaff%22%20stroke-opacity%3D%22.85%22%20stroke-width%3D%22.8%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E") 10 16,auto}
+ .laptop-screen,.laptop-screen *{cursor:url("assets/cursors/pixel-arrow.svg") 3 5,auto}
 }
 @media(max-width:760px){
  .calendar-laptop{width:96%}.laptop-lid{padding:10px 7px 12px;border-radius:15px 15px 4px 4px}.calendar-app{padding:12px;height:560px;max-height:65vh;min-height:300px}.calendar-app-bar{padding:12px 10px;font-size:9px}.app-month{display:none}.app-lights{gap:4px}.app-lights i{width:6px;height:6px}.calendar-app .calendar-toolbar button{padding:10px 7px}.calendar-app .calendar-event strong{font-size:12px}.laptop-hint{display:none}.laptop-base{height:12px}.laptop-sticky{padding-top:0}
 }
 @media(prefers-reduced-motion:reduce){.laptop-lid{transform:none!important}.calendar-laptop{transform:none;margin-bottom:0}.laptop-screen{opacity:1}.laptop-lid:after{opacity:0}.laptop-hint{display:none}}
+
+/* Avoid fractional perspective scaling and composited text on the open screen. */
+.laptop-scroll:not(.is-lid-moving) .calendar-laptop{perspective:none;transform:none;margin-bottom:0}
+.laptop-scroll:not(.is-lid-moving) .laptop-lid{transform:none;transform-style:flat}
+.laptop-scroll:not(.is-lid-moving) .laptop-screen{transform:none;backface-visibility:visible;opacity:1}
+.laptop-scroll:not(.is-lid-moving) .laptop-back,.laptop-scroll:not(.is-lid-moving) .laptop-lid:after{display:none}
+
+/* Fixed to the viewport so the transformed laptop cannot offset the hotspot. */
+.plan-pixel-cursor{position:fixed;top:0;left:0;width:20px;height:25px;pointer-events:none;z-index:2147483647;image-rendering:pixelated}
+.plan-pixel-cursor img{position:absolute;inset:0;width:100%;height:100%}
+.plan-pixel-arrow{transition:filter 4s ease-in-out}
+.plan-pixel-cursor[hidden]{display:none}
+@media(hover:hover) and (pointer:fine){.laptop-screen.has-pixel-cursor,.laptop-screen.has-pixel-cursor *{cursor:none}}
+@media(prefers-reduced-motion:reduce){.plan-pixel-arrow{transition:none}}

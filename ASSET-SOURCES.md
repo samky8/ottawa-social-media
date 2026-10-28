@@ -9,3 +9,5 @@ All three photographs are downloaded locally from Unsplash, used under https://u
 | assets/kitchen.jpg | https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=1000&q=85 |
 
 Wordmark, favicon and sharing artwork were created for this preview. CSS uses DM Sans and Manrope through Google Fonts, with local system fallbacks. No founder portrait is substituted. Replace illustrative imagery with approved real work as available.
+
+Canada wordmark: `assets/canada-wordmark.svg`, downloaded from https://www.canada.ca/etc/designs/canada/wet-boew/assets/wmms-blk.svg. Used beside the government social media experience supplied by the site owner.

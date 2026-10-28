@@ -2,12 +2,27 @@
 (() => {
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
  const finePointer=matchMedia('(hover: hover) and (pointer: fine)');
+ const serviceCards=[...document.querySelectorAll('.page-index .service-overview .service-cards article')];
+ function updateServices(){
+  const start=innerHeight*.92;
+  const distance=Math.max(1,innerHeight*.28);
+  serviceCards.forEach(card=>{
+   const fraction=Math.min(1,Math.max(0,(start-card.getBoundingClientRect().top)/distance));
+   // Smoothstep ties the fade to scroll position, so scrolling up reverses it.
+   const opacity=reduced.matches?1:fraction*fraction*(3-2*fraction);
+   card.style.setProperty('--service-opacity',opacity);
+   card.classList.add('scroll-fade');
+  });
+ }
  const progress=document.createElement('div');
- progress.className='reading-progress';progress.setAttribute('aria-hidden','true');document.body.append(progress);
+ progress.className='reading-progress';progress.setAttribute('aria-hidden','true');
+ progress.hidden=!!document.querySelector('.page-index');
+ document.body.append(progress);
  let queued=false;
  function updateProgress(){
   const distance=document.documentElement.scrollHeight-innerHeight;
   progress.style.transform=`scaleX(${distance>0?Math.min(1,Math.max(0,scrollY/distance)):0})`;
+  updateServices();
   queued=false;
  }
  function queueProgress(){if(!queued){queued=true;requestAnimationFrame(updateProgress);}}
@@ -26,7 +41,7 @@
    if(entry.boundingClientRect.top>0)enter(entry.target);
    reveals.unobserve(entry.target);
   }),{threshold:.12});
-  document.querySelectorAll('.section-heading,.service-cards article,.sample,.plan,.steps article,.values article,.pricing-invite,.custom-pricing,.about-photo').forEach(el=>reveals.observe(el));
+  document.querySelectorAll('.section-heading,.service-cards article,.sample,.plan,.steps article,.values article,.pricing-invite,.custom-pricing,.about-photo').forEach(el=>{if(!serviceCards.includes(el))reveals.observe(el);});
   const steps=new IntersectionObserver(entries=>entries.forEach(entry=>entry.target.classList.toggle('step-in-view',entry.isIntersecting)),{rootMargin:'-10% 0px -30% 0px',threshold:.4});
   document.querySelectorAll('.steps article').forEach(el=>steps.observe(el));
  }
@@ -44,7 +59,7 @@
   });
  });
  hero?.addEventListener('pointerleave',resetHero);
- reduced.addEventListener('change',()=>{resetHero();if(reduced.matches){animated.forEach(animation=>animation.cancel());animated.clear();}});
+ reduced.addEventListener('change',()=>{resetHero();queueProgress();if(reduced.matches){animated.forEach(animation=>animation.cancel());animated.clear();}});
 
  // A real, keyboard-accessible artwork viewer rather than a decorative cursor.
  const samples=[...document.querySelectorAll('.sample')];
@@ -59,8 +74,8 @@
  const description=document.createElement('p');
  const position=document.createElement('p');position.className='viewer-position';position.setAttribute('aria-live','polite');
  const controls=document.createElement('div');controls.className='viewer-controls';
- const previous=document.createElement('button');previous.type='button';previous.textContent='← Previous';
- const next=document.createElement('button');next.type='button';next.textContent='Next →';
+ const previous=document.createElement('button');previous.type='button';previous.textContent='Previous';
+ const next=document.createElement('button');next.type='button';next.textContent='Next';
  controls.append(previous,next);info.append(label,title,description,position,controls);layout.append(canvas,info);dialog.append(close,layout);document.body.append(dialog);
  let active=0,opener=null;
  function show(index){
@@ -75,7 +90,7 @@
   position.textContent=`Concept ${active+1} of ${samples.length}`;
  }
  samples.forEach((sample,index)=>{
-  const button=document.createElement('button');button.type='button';button.className='view-art';button.textContent='View concept ↗';
+  const button=document.createElement('button');button.type='button';button.className='view-art';button.textContent='View concept';
   button.setAttribute('aria-label',`View ${sample.querySelector('.sample-caption h3').textContent} creative concept`);
   button.addEventListener('click',()=>{opener=button;show(index);dialog.showModal();document.documentElement.classList.add('viewer-open');close.focus();});
   sample.querySelector('.creative').append(button);

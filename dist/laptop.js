@@ -13,6 +13,8 @@
   const top=stage.getBoundingClientRect().top;
   const progress=enabled?Math.max(0,Math.min(1,(innerHeight*.72-top)/(innerHeight*.42))):1;
   const open=focusOpen?1:progress;
+  // Return to normal text rendering once the lid has finished moving.
+  stage.classList.toggle('is-lid-moving',enabled&&open<1);
   const eased=open*open*(3-2*open);
   const angle=-88*(1-eased);
   lid.style.setProperty('--lid-angle',`${angle.toFixed(2)}deg`);
