@@ -34,7 +34,7 @@ const preview={replaceChildren(node){this.selected=node.name;}};
 const templates=Object.fromEntries(packages.map(p=>[`mix-${p.name}`,{content:{cloneNode(){return {name:p.name};}}}]));
 vm.runInNewContext(await readFile('app.js','utf8'),{document:{querySelector(){return null;},querySelectorAll(){return buttons;},addEventListener(){},getElementById(id){return id==='plan-preview'?preview:templates[id];}}});
 for(const button of buttons){button.click();assert.equal(preview.selected,button.dataset.explore);assert.equal(buttons.filter(b=>b.attrs['aria-pressed']==='true').length,1);assert.equal(button.attrs['aria-pressed'],'true');}
-assert.equal(pages.length,6);
+assert.equal(pages.length,8);
 assert(!htmlByFile.get('index.html').includes('id="packages"'));
 assert(!htmlByFile.get('services.html').includes('id="packages"'));
 assert(htmlByFile.get('pricing.html').includes('id="packages"'));

@@ -9,7 +9,7 @@ document.querySelectorAll('[data-calendar-plan]').forEach(button=>button.addEven
  const detail=document.getElementById('event-detail');
  detail.replaceChildren();
  const message=document.createElement('p');message.textContent='Select a content idea for details. Dates and themes are illustrative.';detail.append(message);
- const cta=document.getElementById('calendar-cta');cta.href=`${document.documentElement?.dataset.base||''}/contact.html?plan=${encodeURIComponent(name)}`;cta.textContent=`Discuss ${name} ↗`;
+ const cta=document.getElementById('calendar-cta');cta.href=`${document.documentElement?.dataset.base||''}/${cta.dataset?.contactPage||'contact'}.html?plan=${encodeURIComponent(name)}`;cta.textContent=`Discuss ${name} ↗`;
 }));
 document.querySelectorAll('[data-calendar-view]').forEach(button=>button.addEventListener('click',()=>{
  calendarOutput?.classList.toggle('list-view',button.dataset.calendarView==='list');
