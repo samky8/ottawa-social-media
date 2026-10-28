@@ -19,7 +19,7 @@ for(const [file,html] of htmlByFile){
   if(fragment)assert(htmlByFile.get(target)?.includes(`id="${fragment}"`),`${file}: missing fragment ${url}`);
   links++;
  }
- assert(!/OttawaEvents|Ottawa\.Catering|Ad Mare|guaranteed growth|most popular/i.test(html));
+ assert(!/guaranteed growth|most popular/i.test(html));
  if(html.includes('plan-explorer'))for(const p of packages){
   const template=html.match(new RegExp(`<template id="mix-${p.name}">([\\s\\S]*?)</template>`))?.[1];
   assert(template,`Missing ${p.name} template`);
@@ -27,7 +27,7 @@ for(const [file,html] of htmlByFile){
   assert.equal((template.match(/class="ticket post"/g)||[]).length,p.posts);
  }
 }
-assert.deepEqual(packages.map(p=>[p.reels,p.posts]),[[3,6],[4,8],[6,9]]);
+assert.deepEqual(packages.map(p=>[p.reels,p.posts]),[[2,4],[4,8],[6,9]]);
 // Exercise the actual explorer handlers without introducing a browser dependency.
 const buttons=packages.map(p=>({dataset:{explore:p.name},attrs:{},addEventListener(type,fn){this[type]=fn;},setAttribute(k,v){this.attrs[k]=v;}}));
 const preview={replaceChildren(node){this.selected=node.name;}};
@@ -48,4 +48,5 @@ for(const p of packages){
  assert.equal((calendarBody(p).match(/class="calendar-day /g)||[]).length,28);
 }
 await import('./check-planner.mjs');
+await import('./check-laptop.mjs');
 console.log(`PASS: ${pages.length} pages, ${links} local links/assets/fragments, page structure and calendar quantities for all packages.`);

@@ -1,0 +1,22 @@
+import {readFile} from 'node:fs/promises';
+import vm from 'node:vm';
+import assert from 'node:assert/strict';
+
+const listeners={},events={};
+const style=()=>({values:{},setProperty(key,value){this.values[key]=value;}});
+const lid={style:style(),offsetHeight:600},app={style:{}},media={matches:true,addEventListener(_,fn){this.change=fn;}};
+let top=800,queued;
+const stage={style:style(),classList:{toggle(){}},querySelector(s){return s==='.laptop-lid'?lid:app;},getBoundingClientRect(){return {top};},addEventListener(name,fn){listeners[name]=fn;},contains(target){return target===app;}};
+vm.runInNewContext(await readFile('laptop.js','utf8'),{document:{querySelector(){return stage;}},matchMedia(){return media;},innerHeight:1000,addEventListener(name,fn){events[name]=fn;},requestAnimationFrame(fn){queued=fn;return 1;}});
+const scroll=position=>{top=position;events.scroll();queued();};
+assert.equal(lid.style.values['--lid-angle'],'-88.00deg');
+assert.equal(app.style.pointerEvents,'none');
+assert.equal(stage.style.values['--screen-opacity'],'0');
+assert(Number.parseFloat(stage.style.values['--lid-lift'])>570);
+scroll(510);assert.equal(lid.style.values['--lid-angle'],'-44.00deg');
+scroll(300);assert.equal(lid.style.values['--lid-angle'],'0.00deg');assert.equal(app.style.pointerEvents,'');
+scroll(800);listeners.focusin();assert.equal(lid.style.values['--lid-angle'],'0.00deg');
+listeners.focusout({relatedTarget:null});queued();assert.equal(lid.style.values['--lid-angle'],'-88.00deg');
+media.matches=false;media.change();assert.equal(lid.style.values['--lid-angle'],'0.00deg');assert.equal(app.style.pointerEvents,'');
+media.matches=true;media.change();assert.equal(lid.style.values['--lid-angle'],'-88.00deg');
+console.log('PASS: scroll opening, reverse scroll, keyboard access and live reduced-motion/responsive fallback.');
