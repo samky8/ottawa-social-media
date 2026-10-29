@@ -11,15 +11,18 @@
   const enabled=motion.matches;
   stage.classList.toggle('is-scroll-laptop',enabled);
   const top=stage.getBoundingClientRect().top;
-  const progress=enabled?Math.max(0,Math.min(1,(innerHeight*.72-top)/(innerHeight*.42))):1;
+  const progress=enabled?Math.max(0,Math.min(1,(innerHeight*.62-top)/(innerHeight*.42))):1;
   const open=focusOpen?1:progress;
   // Return to normal text rendering once the lid has finished moving.
   stage.classList.toggle('is-lid-moving',enabled&&open<1);
   const eased=open*open*(3-2*open);
-  const angle=-88*(1-eased);
+  const angle=90*(1-eased);
   lid.style.setProperty('--lid-angle',`${angle.toFixed(2)}deg`);
   // Remove the untransformed lid's empty height above the folded notebook.
-  const lift=lid.offsetHeight*(1-Math.cos(angle*Math.PI/180));
+  const radians=angle*Math.PI/180;
+  const height=lid.offsetHeight;
+  const projectedHeight=height*Math.cos(radians)*1600/(1600+height*Math.sin(radians));
+  const lift=height-projectedHeight;
   stage.style.setProperty('--lid-lift',`${lift.toFixed(2)}px`);
   stage.style.setProperty('--screen-opacity',String(Math.max(0,Math.min(1,(open-.16)/.24))));
   stage.style.setProperty('--cover-opacity',String(1-Math.max(0,Math.min(1,(open-.12)/.22))));

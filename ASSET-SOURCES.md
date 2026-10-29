@@ -11,3 +11,10 @@ All three photographs are downloaded locally from Unsplash, used under https://u
 Wordmark, favicon and sharing artwork were created for this preview. CSS uses DM Sans and Manrope through Google Fonts, with local system fallbacks. No founder portrait is substituted. Replace illustrative imagery with approved real work as available.
 
 Canada wordmark: `assets/canada-wordmark.svg`, downloaded from https://www.canada.ca/etc/designs/canada/wet-boew/assets/wmms-blk.svg. Used beside the government social media experience supplied by the site owner.
+
+About page brand logos (owner-requested, copied without alteration from local brand assets):
+- `assets/ottawa-catering-logo.png`: Downloads/Ottawa_Catering_Complete_Logo_Package/Ottawa_Catering_Complete_Logo_Package/01_Primary_Logo/ottawa-catering-primary-logo_white.png; matches the supplied attachment.
+- `assets/ad-mare-logo.png`: Ad Mare/admareseafood/images/Ad Mare Transparent.png.
+- `assets/ottawa-events-logo.png`: Ottawa Events/Logos/OttawaEventsLogo-WhiteBG.png.
+
+Ad Mare work photo: `assets/ad-mare-review-sticker.jpeg`, supplied by the owner (IMG_6392.jpeg). Displayed with a CSS crop around the tap/scan sticker on the wooden post. Client scope and Spring 2027 start date supplied by the owner.

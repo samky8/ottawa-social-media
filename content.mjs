@@ -66,7 +66,7 @@ export const packages = [
 export const samples = [
  {name:'The Sunday Table',type:'Restaurant · Feed concept',image:'dining.jpg',alt:'Carefully plated restaurant dish on a dining table',headline:'Make an evening of it.',subtitle:'Good food. Better company.',description:'A fictional restaurant concept: food-led art direction and a short invitation to book a table. Created using stock photography.'},
  {name:'Daybreak Coffee',type:'Café · Reel cover concept',image:'coffee.jpg',alt:'Coffee and brewing equipment in warm natural light',headline:'Your morning, made.',subtitle:'A little ritual. A very good coffee.',description:'A fictional café concept: a vertical Reel cover and a repeatable visual direction for everyday rituals. A static concept, not a filmed Reel.'},
- {name:'Gather Kitchen',type:'Catering · Feed concept',image:'kitchen.jpg',alt:'Food cooking over a grill in a working kitchen',headline:'Behind every good gathering.',subtitle:'Made with care. Shared with everyone.',description:'A fictional catering concept: behind-the-scenes imagery and copy that puts the preparation front and centre. No client relationship or results are implied.'}
+ {name:'Ad Mare Seafood',type:'Client work · Website & review generation',client:true,image:'ad-mare-review-sticker.jpeg',alt:'Ad Mare tap-or-scan review sticker mounted on a wooden post',headline:'Good experiences. Shared.',subtitle:'A simple tap. A quick scan.',description:'I built Ad Mare’s website and set up the complete review generation system. Customers tap the NFC sticker or scan its QR code to open the experience page, where they can leave a Google review or send private feedback. I’ll also manage Ad Mare’s social media beginning Spring 2027.'}
 ];
 export const faqs = [
  [

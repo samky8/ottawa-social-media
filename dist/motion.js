@@ -81,17 +81,18 @@
  function show(index){
   active=(index+samples.length)%samples.length;
   const sample=samples[active];
+  label.textContent=sample.dataset.client?'Client work':'Sample creative / fictional business';
   const art=sample.querySelector('.creative').cloneNode(true);
   art.querySelector('.view-art')?.remove();
   art.querySelector('img').loading='eager';
   canvas.replaceChildren(art);
   title.textContent=sample.querySelector('.sample-caption h3').textContent;
   description.textContent=sample.querySelector('.sample-description').textContent;
-  position.textContent=`Concept ${active+1} of ${samples.length}`;
+  position.textContent=`Work ${active+1} of ${samples.length}`;
  }
  samples.forEach((sample,index)=>{
-  const button=document.createElement('button');button.type='button';button.className='view-art';button.textContent='View concept';
-  button.setAttribute('aria-label',`View ${sample.querySelector('.sample-caption h3').textContent} creative concept`);
+  const button=document.createElement('button');button.type='button';button.className='view-art';button.textContent=sample.dataset.client?'View photo':'View concept';
+  button.setAttribute('aria-label',`View ${sample.querySelector('.sample-caption h3').textContent} ${sample.dataset.client?'project photo':'creative concept'}`);
   button.addEventListener('click',()=>{opener=button;show(index);dialog.showModal();document.documentElement.classList.add('viewer-open');close.focus();});
   sample.querySelector('.creative').append(button);
  });

@@ -39,10 +39,10 @@ The form validates locally, has a honeypot, and allows downloading an inquiry. I
 
 ## Before launch
 
-- Confirm the final logo and production identity before launch. Samuel Burke is introduced on About without a photograph.
+- Confirm the final logo and production identity before launch. Sam Burke is introduced on About without a photograph.
 - Confirm the production domain, social links and optional booking URL. The current public contact is contact.ottawaevents@gmail.com.
 - Packages are $795 / $1,495 / $2,495 CAD per month including taxes, with an initial three-month commitment followed by month-to-month service. One revision round per deliverable and filming within the agreed Ottawa service area are included. Presence: 3 videos / 4 posts and filming every two months; Growth: 5 videos / 8 posts / 4 Stories; Partner: 8 videos / 12 posts / 8 Stories.
-- Supply approved project assets and permission to use each name, logo, screenshot and link. Distinguish owned projects, website management and social media work. Current public Work page contains only fictional samples.
+- Supply approved project assets and permission to use each name, logo, screenshot and link. Distinguish owned projects, website management and social media work. Work includes two fictional samples and the owner-approved Ad Mare website and review generation project.
 - Connect and test inquiry delivery end to end. Confirm privacy and retention wording; never put secret keys in this static site.
 - Set `brand.url`, generate an absolute production sitemap, add canonical URLs, replace the SVG social preview with a 1200×630 PNG/JPEG for broad crawler support, and remove preview/noindex restrictions only after approval. The current sitemap intentionally uses example.invalid, not an invented domain.
 - Connect inquiry delivery before launch. Perform final live-domain QA and verify all outbound contact links.
@@ -66,3 +66,5 @@ SEO/AEO is owner-confirmed as a service area; no credentials, years of experienc
 The pricing calendar sits inside a MacBook-style frame. `laptop.css` supplies the screen, shell and neon pixel arrow cursor; `laptop.js` opens the lid as the page scrolls on larger displays. Small screens, short viewports and reduced-motion preferences show the calendar open. Keyboard focus opens it immediately, and the calendar remains usable without JavaScript. The screen scrolls independently to keep every event and control accessible. Build both outputs with `npm run build:pages`. `npm run check` covers scroll progress, keyboard opening and preference changes alongside the existing calendar interactions. Visual browser verification remains outstanding because the computer/browser connection was unavailable.
 
 The content-plan cursor uses a regular-size 20 ? 25 px pixel arrow inspired by a classic blue pointer. Separate outline and fill SVG layers in `assets/cursors/pixel-arrow*.svg` keep the navy outline fixed while the shaded fill fades to a new hue every five seconds, with a four-second transition. `plan-cursor.js` handles hover, loading fallback and cleanup. Touch devices retain normal behavior; reduced-motion preferences keep the original blue.
+
+Clicking with the content-plan cursor active adds three short navy pixel rays above the tip. They extend and fade in 320 ms without changing the cursor or blocking controls. The effect is skipped for keyboard/touch clicks and reduced-motion preferences.

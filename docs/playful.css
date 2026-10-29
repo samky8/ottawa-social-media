@@ -42,6 +42,18 @@
 .about-story{grid-template-columns:minmax(0,780px);justify-content:center}
 .contact-email{overflow-wrap:anywhere}
 
+/* Native touch scrolling keeps the homepage examples in one compact row. */
+.samples-swipe-hint{display:none}
+@media(max-width:760px){
+ .page-index .samples-swipe-hint{display:block;margin:0 0 16px;font-size:12px;color:var(--muted)}
+ .page-index .samples{display:grid;grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:86%;gap:20px;overflow-x:auto;overscroll-behavior-x:contain;scroll-snap-type:x mandatory;scroll-padding-inline:6vw;margin-inline:-6vw;padding:0 6vw 18px;scrollbar-width:thin;scrollbar-color:var(--ink) transparent}
+ .page-index .samples>.sample{min-width:0;padding-top:0;scroll-snap-align:start}
+ .page-index .samples .creative{height:clamp(330px,105vw,460px)}
+ .page-index .samples:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+}
+
 /* A small wordmark accent in the current monthly price. */
 .price-period{white-space:nowrap}
-.price-slash{display:inline-block;font-family:Manrope,Arial,sans-serif;font-style:normal;font-weight:800;font-size:14px;line-height:1.2;color:var(--ink);background:var(--coral);padding:0 .13em;margin:0 .10em 0 .26em;letter-spacing:0;transform:skew(-10deg);transform-origin:50% 55%;text-shadow:none}
+.price-slash,.service-slash{display:inline-block;font-family:Manrope,Arial,sans-serif;font-style:normal;font-weight:800;font-size:14px;line-height:1.2;color:var(--ink);background:var(--coral);padding:0 .13em;margin:0 .10em 0 .26em;letter-spacing:0;transform:skew(-10deg);transform-origin:50% 55%;text-shadow:none}
+
+.service-slash{font-size:.72em;vertical-align:.04em}

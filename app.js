@@ -1,3 +1,20 @@
+const backToTop=document.querySelector('.back-to-top');
+if(backToTop){
+const updateBackToTop=()=>{
+ const scrollable=document.documentElement.scrollHeight-window.innerHeight;
+ backToTop.hidden=scrollable<=0||window.scrollY<=scrollable/2;
+};
+window.addEventListener('scroll',updateBackToTop,{passive:true});
+window.addEventListener('resize',updateBackToTop);
+new ResizeObserver(updateBackToTop).observe(document.body);
+backToTop.addEventListener('click',()=>{
+ window.scrollTo({top:0,behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});
+ const topLink=document.querySelector('.skip');
+ topLink?.focus({preventScroll:true});
+});
+updateBackToTop();
+}
+
 const toggle=document.querySelector('#menu-toggle');
 if(toggle){
  const navigation=document.querySelector('#navigation');
