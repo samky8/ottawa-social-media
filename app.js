@@ -45,12 +45,27 @@ document.querySelectorAll('[data-explore]').forEach(button=>{
 });
 if(form){
  const interest=form.elements.interest;const plan=new URLSearchParams(location.search).get('plan');if([...interest.options].some(o=>o.value===plan))interest.value=plan;
- let prepared='';const status=document.querySelector('#form-status'),download=document.querySelector('#download');
+ let prepared='',sending=false;const status=document.querySelector('#form-status'),download=document.querySelector('#download');
+ const submit=form.querySelector('[type="submit"]');
  form.addEventListener('input',()=>{download.hidden=true;prepared='';status.textContent='';});
- form.addEventListener('submit',event=>{event.preventDefault();if(form.elements.website2.value){status.textContent='Unable to prepare this inquiry. Please reload and try again.';return;}
+ form.addEventListener('submit',async event=>{event.preventDefault();if(sending)return;if(form.elements.website2.value){status.textContent='Unable to send this inquiry. Please reload and try again.';return;}
  let first=null;for(const name of ['name','business','email','message']){const field=form.elements[name],error=document.querySelector(`#${name}-error`);let message='';if(!field.value.trim())message='Please fill in this field.';else if(!field.validity.valid)message=name==='email'?'Enter a valid email address, such as name@example.com.':'Please check this field.';field.setAttribute('aria-invalid',String(!!message));field.setAttribute('aria-describedby',`${name}-error`);error.textContent=message;if(message&&!first)first=field;}
  if(first){status.textContent='Please check the highlighted fields.';first.focus();return;}
- prepared=['Consultation inquiry',...(form.dataset.offer?[form.dataset.offer]:[]),...['name','business','email','profile','interest','message'].map(n=>`${n[0].toUpperCase()+n.slice(1)}: ${form.elements[n].value.trim()}`)].join('\n\n');status.textContent='Your inquiry is ready to download. It has not been sent. Please email the downloaded inquiry to contact.ottawaevents@gmail.com.';download.hidden=false;status.focus();
+ prepared=['Consultation inquiry',...(form.dataset.offer?[form.dataset.offer]:[]),...['name','business','email','profile','interest','message'].map(n=>`${n[0].toUpperCase()+n.slice(1)}: ${form.elements[n].value.trim()}`)].join('\n\n');
+ const recipient=form.dataset.recipient;
+ if(!form.dataset.accessKey){status.textContent=`Your inquiry is ready to download. It has not been sent. Please email the downloaded inquiry to ${recipient}.`;download.hidden=false;status.focus();return;}
+ const payload=Object.fromEntries(['name','business','email','profile','interest','message'].map(name=>[name,form.elements[name].value.trim()]));
+ Object.assign(payload,{access_key:form.dataset.accessKey,subject:'LOCAL / SOCIAL — New consultation inquiry',from_name:'LOCAL / SOCIAL website',replyto:payload.email,offer:form.dataset.offer,botcheck:''});
+ sending=true;submit.disabled=true;form.setAttribute('aria-busy','true');download.hidden=true;status.textContent='Sending your inquiry…';
+ const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),20000);
+ try{
+  const response=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(payload),signal:controller.signal});
+  const result=await response.json();
+  if(!response.ok||result.success!==true)throw new Error('Submission not accepted');
+  status.textContent='Thank you! Your inquiry has been submitted. We’ll reply by email.';prepared='';form.reset();
+ }catch{
+  status.textContent=`We couldn’t confirm your submission. Your details are still here. Please email ${recipient}, or download a copy of your inquiry.`;download.hidden=false;
+ }finally{clearTimeout(timeout);sending=false;submit.disabled=false;form.removeAttribute('aria-busy');status.focus();}
  });
  download.addEventListener('click',()=>{if(!prepared)return;const url=URL.createObjectURL(new Blob([prepared],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='consultation-inquiry.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);});
 }
