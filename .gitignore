@@ -3,3 +3,17 @@ node_modules/
 .private/
 qa/
 *.log
+
+# Local build output (GitHub Pages uses docs/)
+/dist/
+
+# Private workspace notes and assistant configuration
+.agents/
+.codex/
+.claude/
+.cursor/
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+MANAGER-ASSET.md
+**/*.private.md
