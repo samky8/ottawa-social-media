@@ -1,10 +1,10 @@
-# LOCAL / SOCIAL â€” local website preview
+# LOCAL / SOCIAL — local website preview
 
 A six-page, dependency-free static website for an Ottawa social media management, SEO/AEO and digital presence service. LOCAL / SOCIAL is the current agency name.
 
 Domain: https://localsocial.ca/
 
-Repository: https://github.com/samky8/ottawa-social-media-draft
+Repository: https://github.com/samky8/ottawa-social-media
 
 GitHub Pages serves `docs/` from `main`. To update the draft, run `npm run build:pages`, run `npm run check`, then commit and push the changed source and generated files. The Pages build uses root-relative links for localsocial.ca, writes docs/CNAME on every build, and generates domain-specific sitemap URLs while keeping `dist/` suitable for local preview. The public draft retains noindex metadata and a download-only inquiry form with email instructions; it is publicly accessible, not access-controlled.
 
@@ -44,7 +44,7 @@ The form validates locally, has a honeypot, and allows downloading an inquiry. I
 - Packages are $795 / $1,495 / $2,495 CAD per month including taxes, with an initial three-month commitment followed by month-to-month service. One revision round per deliverable and filming within the agreed Ottawa service area are included. Presence: 3 videos / 4 posts and filming every two months; Growth: 5 videos / 8 posts / 4 Stories; Partner: 8 videos / 12 posts / 8 Stories.
 - Supply approved project assets and permission to use each name, logo, screenshot and link. Distinguish owned projects, website management and social media work. Work includes two fictional samples and the owner-approved Ad Mare website and review generation project.
 - Connect and test inquiry delivery end to end. Confirm privacy and retention wording; never put secret keys in this static site.
-- Set `brand.url`, generate an absolute production sitemap, add canonical URLs, replace the SVG social preview with a 1200Ã—630 PNG/JPEG for broad crawler support, and remove preview/noindex restrictions only after approval. The current sitemap intentionally uses example.invalid, not an invented domain.
+- Set `brand.url`, generate an absolute production sitemap, add canonical URLs, replace the SVG social preview with a 1200×630 PNG/JPEG for broad crawler support, and remove preview/noindex restrictions only after approval. The current sitemap intentionally uses example.invalid, not an invented domain.
 - Connect inquiry delivery before launch. Perform final live-domain QA and verify all outbound contact links.
 
 No private source brief, user filesystem paths or credentials are included in the site. The owner-approved biography mentions OttawaEvents, Ottawa.Catering and Ad Mare Seafood. `.private/`, `.env*` and `qa/` are excluded from Git. No analytics, advertising pixels or cookies are installed.
