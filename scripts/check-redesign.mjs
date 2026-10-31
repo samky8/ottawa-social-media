@@ -37,9 +37,9 @@ assert.equal((pricing.match(/<details><summary>/g)||[]).length,9);
 assert(pricing.includes('15% off'));
 assert(pricing.includes('CAD &middot; including taxes'));
 assert(htmlByFile.get('contact.html').includes('All prices are CAD per month, including taxes.'));
-assert(htmlByFile.get('contact.html').includes('$675.75 CAD/month for 2 months, then $795/month'));
+assert(htmlByFile.get('contact.html').includes('$675 CAD/month for 2 months, then $795/month'));
 for(const p of packages){
- const discounted=(Number(p.price.replaceAll(',',''))*0.85).toLocaleString('en-CA',{minimumFractionDigits:2,maximumFractionDigits:2});
+ const discounted=Math.floor(Number(p.price.replaceAll(',',''))*0.85).toLocaleString('en-CA');
  assert(pricing.includes('$'+discounted+'<span class="price-period"> <i class="price-slash">/</i> month'));
  assert(pricing.includes('For your first 2 months, then regular price.'));
  assert(pricing.includes('/contact.html?plan='+p.name));

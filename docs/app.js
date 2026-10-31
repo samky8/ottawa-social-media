@@ -47,6 +47,24 @@ if(form){
  const interest=form.elements.interest;const plan=new URLSearchParams(location.search).get('plan');if([...interest.options].some(o=>o.value===plan))interest.value=plan;
  let prepared='',sending=false;const status=document.querySelector('#form-status'),download=document.querySelector('#download');
  const submit=form.querySelector('[type="submit"]');
+ const celebrate=()=>{
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches||!Element.prototype.animate)return;
+  const layer=document.createElement('div');
+  layer.setAttribute('aria-hidden','true');
+  layer.style.cssText='position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:9999';
+  document.body.append(layer);
+  const colors=['#f07865','#e7bb49','#71866a','#8ca9bf'];
+  for(let i=0;i<64;i++){
+   const piece=document.createElement('span');
+   piece.style.cssText='position:absolute;top:-20px;left:'+Math.random()*100+'%;width:8px;height:12px;background:'+colors[i%colors.length]+';border-radius:2px';
+   layer.append(piece);
+   piece.animate([
+    {transform:'translate3d(0,-20px,0) rotate(0deg)',opacity:1},
+    {transform:'translate3d('+(Math.random()*240-120)+'px,'+(window.innerHeight+60)+'px,0) rotate('+(Math.random()*1080-540)+'deg)',opacity:0}
+   ],{duration:1800+Math.random()*1000,delay:Math.random()*250,easing:'cubic-bezier(.2,.6,.5,1)',fill:'both'});
+  }
+  setTimeout(()=>layer.remove(),3200);
+ };
  form.addEventListener('input',()=>{download.hidden=true;prepared='';status.textContent='';});
  form.addEventListener('submit',async event=>{event.preventDefault();if(sending)return;if(form.elements.website2.value){status.textContent='Unable to send this inquiry. Please reload and try again.';return;}
  let first=null;for(const name of ['name','business','email','message']){const field=form.elements[name],error=document.querySelector(`#${name}-error`);let message='';if(!field.value.trim())message='Please fill in this field.';else if(!field.validity.valid)message=name==='email'?'Enter a valid email address, such as name@example.com.':'Please check this field.';field.setAttribute('aria-invalid',String(!!message));field.setAttribute('aria-describedby',`${name}-error`);error.textContent=message;if(message&&!first)first=field;}
@@ -62,7 +80,7 @@ if(form){
   const response=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(payload),signal:controller.signal});
   const result=await response.json();
   if(!response.ok||result.success!==true)throw new Error('Submission not accepted');
-  status.textContent='Thank you! Your inquiry has been submitted. We’ll reply by email.';prepared='';form.reset();
+  status.textContent='Thanks so much for reaching out! We’ll review your message and get back to you shortly. We’re looking forward to learning more about your business.';prepared='';form.reset();celebrate();
  }catch{
   status.textContent=`We couldn’t confirm your submission. Your details are still here. Please email ${recipient}, or download a copy of your inquiry.`;download.hidden=false;
  }finally{clearTimeout(timeout);sending=false;submit.disabled=false;form.removeAttribute('aria-busy');status.focus();}
