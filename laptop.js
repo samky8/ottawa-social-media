@@ -3,7 +3,7 @@
  const stage=document.querySelector('.laptop-scroll');
  if(!stage)return;
  const lid=stage.querySelector('.laptop-lid');
- const app=stage.querySelector('.calendar-app');
+ const screen=stage.querySelector('.laptop-screen');
  const motion=matchMedia('(min-width:761px) and (min-height:650px) and (prefers-reduced-motion:no-preference)');
  let frame=0,focusOpen=false;
  function update(){
@@ -28,7 +28,7 @@
   stage.style.setProperty('--cover-opacity',String(1-Math.max(0,Math.min(1,(open-.12)/.22))));
   stage.style.setProperty('--hint-opacity',String(1-open));
   // Tab focus opens the display immediately; a folded screen never traps focus.
-  app.style.pointerEvents=open<.85?'none':'';
+  screen.style.pointerEvents=open<.85?'none':'';
  }
  function queue(){if(!frame)frame=requestAnimationFrame(update);}
  stage.addEventListener('focusin',()=>{focusOpen=true;update();});

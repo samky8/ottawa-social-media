@@ -1,4 +1,7 @@
 /* A scroll-open notebook around the live, accessible calendar. */
+/* The lifted 3D wrapper must not intercept links above the visible laptop. */
+.calendar-laptop{pointer-events:none}
+.laptop-screen{pointer-events:auto}
 .laptop-scroll{position:relative;margin-top:35px}
 .laptop-sticky{position:relative;padding:18px 0 45px}
 .laptop-hint{text-align:center;font-size:11px;letter-spacing:.14em;text-transform:uppercase;margin:0 0 22px;color:var(--muted)}
