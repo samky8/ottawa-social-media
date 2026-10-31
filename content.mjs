@@ -49,7 +49,7 @@ export const packages = [
   "price": "2,495",
   "intro": "For established businesses seeking more content, stronger strategy and ongoing marketing support.",
   "shootCount": 1,
-  "shoot": "Up to 3 hours of on-site filming monthly, across one or two sessions",
+  "shoot": "On-site filming every month (up to 2 hours)"
   "reels": 8,
   "posts": 12,
   "stories": 8,

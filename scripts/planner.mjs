@@ -9,7 +9,7 @@ export function schedule(p){
   return {day,type:reel?'Reel':'Feed post',title:topics[previous%topics.length],description:reel?'A professionally edited short-form video of up to 60 seconds, with a caption and versions for Instagram and Facebook.':'A branded photo post, graphic or carousel of up to 5 slides, with a caption and versions for Instagram and Facebook.'};
  });
  const stories=Array.from({length:p.stories},(_,i)=>({day:6+Math.floor(i*21/p.stories),type:'Story',title:'Story placement '+(i+1),description:'One individual Story frame, published to Instagram and/or Facebook.'}));
- return [{day:1,type:'Shoot',title:p.name==='Presence'?'Filming month: on-site shoot':'On-site content shoot',description:p.shoot+'. '+(p.name==='Presence'?'This example shows a filming month. The following month uses captured footage and client-supplied photos and updates; no shoot is included that month.':p.name==='Partner'?'This example uses one session; the same total of up to 3 hours may be split across two sessions.':'')},...entries,...stories].sort((a,b)=>a.day-b.day);
+ return [{day:1,type:'Shoot',title:p.name==='Presence'?'Filming month: on-site shoot':'On-site content shoot',description:p.shoot+'. '+(p.name==='Presence'?'This example shows a filming month. The following month uses captured footage and client-supplied photos and updates; no shoot is included that month.':p.name==='Partner'?'This example uses one session; the same total of up to 2 hours may be split across two sessions.':'')},...entries,...stories].sort((a,b)=>a.day-b.day);
 }
 export function calendarBody(p){
  const events=schedule(p);
