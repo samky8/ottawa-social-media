@@ -16,11 +16,11 @@ export const packages = [
   "posts": 4,
   "stories": 0,
   "features": [
+   "Custom social media strategy (including account audit, competitor analysis, and content planning)",
    "Captions, content planning and scheduling",
    "Instagram + Facebook cross-posting",
    "Monthly performance snapshot",
-   "Client supplies supplementary photos and updates",
-   "Monthly strategy and planning meeting"
+   "Client supplies supplementary photos and updates"
   ]
  },
  {
@@ -35,6 +35,7 @@ export const packages = [
   "stories": 4,
   "featured": true,
   "features": [
+   "Custom social media strategy (including account audit, competitor analysis, and content planning)",
    "4 Instagram/Facebook Story placements per month",
    "Monthly strategy and planning meeting",
    "Instagram + Facebook management",
@@ -53,6 +54,7 @@ export const packages = [
   "posts": 12,
   "stories": 8,
   "features": [
+   "Custom social media strategy (including account audit, competitor analysis, and content planning)",
    "8 Instagram/Facebook Story placements per month",
    "Monthly strategy and planning meeting",
    "Creator, UGC and local collaboration outreach (up to 5 contacts/month)",
